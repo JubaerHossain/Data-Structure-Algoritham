@@ -1,3 +1,3 @@
 # Data-Structures-Algoritham
 
-#Data structures using algorithm
+#Data structures using python
