@@ -1,41 +1,66 @@
-class DijSet:
-    def __init__(self, n):
-        self.rank = [1] * n
-        self.parent = [i for i in range(n)]
+dicSet = {
+    'name': 'python',
+    'age': 18,
+}
 
-    def find(self, x):
-        if self.parent[x] != x:
-           self.parent[x] = self.find(self.parent[x])
-        return self.parent[x]
-    
-    def Union (self, x, y):
+# print(dicSet)
 
-        x_set = self.find(x)
-        y_set = self.find(y)
+# # dicSet add item
+# dicSet['name'] = 'python2'
+# dicSet['age'] = 19
+#update item
+# dicSet.update({'name': 'python3', 'age': 20})
+# #dicSet remove item
 
-        if x_set == y_set:
-            return
+#get item from dic
+# itm = dicSet.get('name')
+# print(itm)
+# remove item from dict
+# dicSet.pop('name')
+# print(dicSet)
 
-        if self.rank[x_set] <  self.rank[y_set]:
-            self.parent[x_set] = y_set
-        elif self.rank[x_set] > self.rank[y_set]:
-            self.parent[y_set] = x_set
-        else:
-            self.parent[y_set] = x_set
-            self.rank[x_set] += 1
+#loop dict
+# for i in dicSet:
+#     print(i)
+# print(dicSet['name'])
+# print(dicSet['age'])
 
 
-obj = DijSet(5)
-obj.Union(0, 2)
-obj.Union(4, 2)
-obj.Union(3, 1)
+#copy dict
+# dicSet2 = dicSet.copy()
+# print(dicSet2)
 
-if obj.find(0) == obj.find(4):
-    print("Yes")
-else:
-    print("No")
+#nested dict
+dicSet3 = {
+    'python': {
+        'year': 1992
+    },
+    'java': {
+        'year': 1995
+    },
+    'c++': {
+        'year': 1994
+    },
+    'c': {
+        'year': 1993
+    }
+}
 
-if obj.find(1) == obj.find(0):
-    print("Yes")
-else:
-    print("No")
+# print(dicSet3)
+for i in dicSet3:
+    for j in dicSet3[i]:
+        print(i, dicSet3[i][j])
+
+#methods
+
+# clear()	Removes all the elements from the dictionary
+# copy()	Returns a copy of the dictionary
+# fromkeys()	Returns a dictionary with the specified keys and value
+# get()	Returns the value of the specified key
+# items()	Returns a list containing a tuple for each key value pair
+# keys()	Returns a list containing the dictionary's keys
+# pop()	Removes the element with the specified key
+# popitem()	Removes the last inserted key-value pair
+# setdefault()	Returns the value of the specified key. If the key does not exist: insert the key, with the specified value
+# update()	Updates the dictionary with the specified key-value pairs
+# values()
