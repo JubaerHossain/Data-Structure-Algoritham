@@ -1,66 +1,64 @@
-dicSet = {
-    'name': 'python',
-    'age': 18,
-}
-
-# print(dicSet)
-
-# # dicSet add item
-# dicSet['name'] = 'python2'
-# dicSet['age'] = 19
-#update item
-# dicSet.update({'name': 'python3', 'age': 20})
-# #dicSet remove item
-
-#get item from dic
-# itm = dicSet.get('name')
-# print(itm)
-# remove item from dict
-# dicSet.pop('name')
-# print(dicSet)
-
-#loop dict
-# for i in dicSet:
-#     print(i)
-# print(dicSet['name'])
-# print(dicSet['age'])
+# Dijkstra's Algorithm in Python
 
 
-#copy dict
-# dicSet2 = dicSet.copy()
-# print(dicSet2)
+import sys
 
-#nested dict
-dicSet3 = {
-    'python': {
-        'year': 1992
-    },
-    'java': {
-        'year': 1995
-    },
-    'c++': {
-        'year': 1994
-    },
-    'c': {
-        'year': 1993
-    }
-}
+# Providing the graph
+vertices = [[0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 1, 0, 0, 1, 0],
+            [1, 1, 0, 1, 1, 0, 0],
+            [1, 0, 1, 0, 0, 0, 1],
+            [0, 0, 1, 0, 0, 1, 0],
+            [0, 1, 0, 0, 1, 0, 1],
+            [0, 0, 0, 1, 0, 1, 0]]
 
-# print(dicSet3)
-for i in dicSet3:
-    for j in dicSet3[i]:
-        print(i, dicSet3[i][j])
+edges = [[0, 0, 1, 2, 0, 0, 0],
+         [0, 0, 2, 0, 0, 3, 0],
+         [1, 2, 0, 1, 3, 0, 0],
+         [2, 0, 1, 0, 0, 0, 1],
+         [0, 0, 3, 0, 0, 2, 0],
+         [0, 3, 0, 0, 2, 0, 1],
+         [0, 0, 0, 1, 0, 1, 0]]
 
-#methods
+# Find which vertex is to be visited next
+def to_be_visited():
+    global visited_and_distance
+    v = -10
+    for index in range(num_of_vertices):
+        if visited_and_distance[index][0] == 0 \
+            and (v < 0 or visited_and_distance[index][1] <=
+                 visited_and_distance[v][1]):
+            v = index
+    return v
 
-# clear()	Removes all the elements from the dictionary
-# copy()	Returns a copy of the dictionary
-# fromkeys()	Returns a dictionary with the specified keys and value
-# get()	Returns the value of the specified key
-# items()	Returns a list containing a tuple for each key value pair
-# keys()	Returns a list containing the dictionary's keys
-# pop()	Removes the element with the specified key
-# popitem()	Removes the last inserted key-value pair
-# setdefault()	Returns the value of the specified key. If the key does not exist: insert the key, with the specified value
-# update()	Updates the dictionary with the specified key-value pairs
-# values()
+
+num_of_vertices = len(vertices[0])
+
+visited_and_distance = [[0, 0]]
+for i in range(num_of_vertices-1):
+    visited_and_distance.append([0, sys.maxsize])
+
+for vertex in range(num_of_vertices):
+
+    # Find next vertex to be visited
+    to_visit = to_be_visited()
+    for neighbor_index in range(num_of_vertices):
+
+        # Updating new distances
+        if vertices[to_visit][neighbor_index] == 1 and \
+                visited_and_distance[neighbor_index][0] == 0:
+            new_distance = visited_and_distance[to_visit][1] \
+                + edges[to_visit][neighbor_index]
+            if visited_and_distance[neighbor_index][1] > new_distance:
+                visited_and_distance[neighbor_index][1] = new_distance
+        
+        visited_and_distance[to_visit][0] = 1
+
+i = 0
+print(visited_and_distance)
+
+# Printing the distance
+for distance in visited_and_distance:
+    print("Distance of ", chr(ord('a') + i),
+          " from source vertex: ", distance[1])
+    i = i + 1
