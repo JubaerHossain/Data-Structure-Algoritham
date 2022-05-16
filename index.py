@@ -1,29 +1,35 @@
-#python tuple
+#python hash table
+hash_table = [0] * 10
+def checkPrime(num):
+    if num == 1 or num == 0:
+        return False
+    for i in range(2, num//2):
+        if num % i == 0:
+            return False
+    return True
+def getPrime(n):
+    if n % 2 == 0:
+        n += 1
+    while not checkPrime(n):
+        n += 2
+    return n
+def hashFunction(key):
+    c = getPrime(10)
+    return key % c
 
-tupleList = (1,2,3,4,5,6,7,8,9,10)
+def insert_hash(key, value):
+    index = hashFunction(key)
+    hash_table[index] = [key, value]
+def remove_hash(key):
+    index = hashFunction(key)
+    hash_table[index] = 0
 
-tupleToList = list(tupleList) #  tuples to convert to list because tuple is immutable
-tupleToList.append(11)
-tupleToList.append(12)
-tupleToList.append(13)
 
-tupleToList.remove(11) # remove element from list and convert back to tuple
-tupleList = tuple(tupleToList) 
+insert_hash(1, "one")
+insert_hash(2, "two")
+insert_hash(3, "three")
+insert_hash(4, "four")
+insert_hash(5, "five")
 
-newItem = ('newItem',)
 
-tupleList += newItem
-
-(newItem, *printData) = tupleList # unpacking tuple
-
-for x in tupleList: # loop through tuple
-    print(x)
-for x in range(len(tupleList)): # loop through tuple
-    print(tupleList[x])
-
-joinList = tupleList * 2 # join tuple
-print(joinList)
-
-# tuple methods 
-print(tupleList.count(1)) # count number of times 1 appears in tuple
-print(tupleList.index(1)) # index of 1 in tuple
+print(hash_table)
