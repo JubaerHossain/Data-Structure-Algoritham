@@ -1,69 +1,29 @@
-#link list implementation
-class Node:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
-class LinkList(Node):
-    def __init__(self):
-        self.head = None
-        self.tail = None
-        self.size = 0
+#python tuple
 
-    def add(self, value):
-        new_node = Node(value)
-        if self.head is None:
-            self.head = new_node
-            self.tail = new_node
-        else:
-            self.tail.next = new_node
-            self.tail = new_node
-        self.size += 1
+tupleList = (1,2,3,4,5,6,7,8,9,10)
 
-    def remove(self, value):
-        current = self.head
-        previous = None
-        while current is not None:
-            if current.value == value:
-                if previous is None:
-                    self.head = current.next
-                else:
-                    previous.next = current.next
-                self.size -= 1
-                return True
-            else:
-                previous = current
-                current = current.next
-        return False
+tupleToList = list(tupleList) #  tuples to convert to list because tuple is immutable
+tupleToList.append(11)
+tupleToList.append(12)
+tupleToList.append(13)
 
-    def search(self, value):
-        current = self.head
-        while current is not None:
-            if current.value == value:
-                return True
-            else:
-                current = current.next
-        return False
+tupleToList.remove(11) # remove element from list and convert back to tuple
+tupleList = tuple(tupleToList) 
 
-    def print(self):
-        values = []
-        current = self.head
-        while current is not None:
-            values.append(current.value)
-            current = current.next
+newItem = ('newItem',)
 
-        print(values)
+tupleList += newItem
 
-    def get_size(self):
-        return self.size
+(newItem, *printData) = tupleList # unpacking tuple
 
+for x in tupleList: # loop through tuple
+    print(x)
+for x in range(len(tupleList)): # loop through tuple
+    print(tupleList[x])
 
+joinList = tupleList * 2 # join tuple
+print(joinList)
 
-obj = LinkList()
-obj.add(2)
-obj.add(3)
-obj.add(4)
-obj.add(5)
-obj.print()
-obj.remove(3)
-
-obj.print()
+# tuple methods 
+print(tupleList.count(1)) # count number of times 1 appears in tuple
+print(tupleList.index(1)) # index of 1 in tuple
