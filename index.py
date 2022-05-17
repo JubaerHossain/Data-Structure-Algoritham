@@ -9,8 +9,8 @@ def insertionSort(data):
 
 data = [5,2,4,6,1,3]
 print(insertionSort(data))
-
-#time complexity: O(n^2) because of nested loops and swaps in the inner loop 
+#best case time complexity O(n)
+#worst case time complexity: O(n^2) because of nested loops and swaps in the inner loop 
 #space complexity: O(1) because no extra space is used 
 
 
