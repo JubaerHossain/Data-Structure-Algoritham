@@ -1,18 +1,44 @@
-#Insertion Sort
-def insertionSort(data):
-    for i in range(1,len(data)):
-        j = i
-        while j > 0 and data[j] < data[j-1]:
-            data[j], data[j-1] = data[j-1], data[j]
-            j = j-1
-    return data
+#Merge Sort
+def MergeSort(data):
+    print(data)
+    if len(data) > 1:
+        mid = len(data) // 2
+        L = data[:mid]
+        R = data[mid:]
 
-data = [5,2,4,6,1,3]
-print(insertionSort(data))
-#best case time complexity O(n)
-#worst case time complexity: O(n^2) because of nested loops and swaps in the inner loop 
-#space complexity: O(1) because no extra space is used 
+        MergeSort(L)
+        MergeSort(R)
+
+        i = j = k = 0
+
+        while i < len(L) and j < len(R):
+            if L[i] < R[j]:
+                data[k] = L[i]
+                i += 1
+            else:
+                data[k] = R[j]
+                j += 1
+            k += 1
+
+        while i < len(L):
+            data[k] = L[i]
+            i += 1
+            k += 1
+
+        while j < len(R):
+            data[k] = R[j]
+            j += 1
+            k += 1
 
 
 
+data = [54,26,93,17,77,31,44,55,20]
+MergeSort(data)
+print(data)
+
+
+#best case: O(n)
+#worst case: O(n^2)
+#average case: O(n log n)
+#space complexity: O(n)
 
