@@ -44,6 +44,38 @@ class LinkList:
                 else:
                     curent = current.next
             return False
+    def search(self, data):
+        current = self.head
+        while current is not None:
+            if current.data == data:
+                return True
+            else:
+                curent = current.next
+        return False
+    def update(self, data, update):
+        current = self.head
+        while current is not None:
+            if current.data == data:
+               current.data = update
+               break
+            else:
+                current = current.next
+        return False
+    def delete(self,data):
+        current = self.head
+        previous = None
+        while current is not None:
+            if current.data == data:
+                if previous is None:
+                    self.head = current.next
+                else:
+                    previous.next = current.next
+                self.size -= 1
+                return True
+            else:
+                previous = current
+                current = current.next
+              
     def __str__(self):
         values = []
         current = self.head
@@ -57,5 +89,12 @@ obj.insertByPosition(2)
 obj.insertByPosition(3)
 print(obj)
 obj.insertByPosition(5,6)
+print(obj)
+print('update')
+obj.update(3,4)
+print(obj)
+
+print('delete')
+obj.delete(2)
 print(obj)
                 
