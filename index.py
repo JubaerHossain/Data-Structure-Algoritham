@@ -18,6 +18,41 @@ class LinkList(Node):
             self.tail.next = new_node
             self.tail = new_node
         self.size += 1
+    def addAtPosition(self, value, position):
+        current = self.head
+        count = 1
+        if self.head is None:
+            new_node = Node(data)
+            self.head = new_node
+            self.tail = new_node
+            self.size += 1
+            return True
+        elif position == False or self.size < position:
+            new_node = Node(value)
+            self.tail.next = new_node
+            self.tail = new_node
+            self.size += 1
+            return True
+        else:    
+            while count <= position and current is not None:
+                print(position, count)
+                count += 1
+                if position == 1:
+                    new_node = Node(value)
+                    new_node.next = current
+                    self.head = new_node
+                    self.size +=1
+                    return True
+                elif count == position:
+                    new_node = Node(value)
+                    new_node.next = current.next
+                    self.head = new_node
+                    self.size += 1
+                    return True
+                else:
+                    curent = current.next
+            return False
+        
 
     def remove(self, value):
         current = self.head
@@ -43,7 +78,18 @@ class LinkList(Node):
             else:
                 current = current.next
         return False
-
+    def update(self, value, update):
+        current = self.head        
+        while current is not None:
+            if current.value == value:
+                current.value = update
+                break
+            else:
+                current = current.next
+        return False           
+            
+        
+        
     def print(self):
         values = []
         current = self.head
@@ -63,7 +109,14 @@ obj.add(2)
 obj.add(3)
 obj.add(4)
 obj.add(5)
+print(obj.search(3))
 obj.print()
 obj.remove(3)
-
+obj.print()
+print('updated value')
+obj.update(4,7)
+obj.print()
+input = int(input('enter the value to be added'))
+print('add position')
+obj.addAtPosition(8,input)
 obj.print()
