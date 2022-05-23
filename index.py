@@ -1,4 +1,7 @@
 #link list implementation
+from os import link
+
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -120,3 +123,35 @@ input = int(input('enter the value to be added'))
 print('add position')
 obj.addAtPosition(8,input)
 obj.print()
+
+#compare two link list
+list1 = LinkList()
+list1.add(2)
+list1.add(3)
+list1.add(4)
+list1.add(5)
+list1.add(7)
+
+list2 = LinkList()
+list2.add(2)
+list2.add(3)
+list2.add(4)
+list2.add(5)
+list2.add(7)
+
+def compare(list1, list2):
+    if list1.get_size() != list2.get_size():
+        return False
+    else:
+        current1 = list1.head
+        current2 = list2.head
+        while current1 is not None:
+            if current1.value != current2.value:
+                return False
+            else:
+                current1 = current1.next
+                current2 = current2.next
+        return True
+print(compare(list1, list2))
+
+
