@@ -1,9 +1,11 @@
 #link list implementation
+from multiprocessing import dummy
+from multiprocessing.reduction import duplicate
 from os import link
 
 
 class Node:
-    def __init__(self, value):
+    def __init__(self, value = None):
         self.value = value
         self.next = None
 class LinkList(Node):
@@ -119,9 +121,8 @@ obj.print()
 print('updated value')
 obj.update(4,7)
 obj.print()
-input = int(input('enter the value to be added'))
 print('add position')
-obj.addAtPosition(8,input)
+obj.addAtPosition(8,1)
 obj.print()
 
 #compare two link list
@@ -152,6 +153,69 @@ def compare(list1, list2):
                 current1 = current1.next
                 current2 = current2.next
         return True
+def print_list(head):
+    values = []
+    current = head
+    while current is not None:
+        values.append(current.value)
+        current = current.next
+    print(values)
+def mergeList(list1, list2):
+    dummy = Node()
+    tail = dummy
+    current1 = list1.head
+    current2 = list2.head
+    while current1 and current2:
+        if current1.value < current2.value:
+            tail.next = current1
+            current1 = current1.next
+        else:
+            tail.next = current2
+            current2 = current2.next
+        tail = tail.next
+    if current1:
+        tail.next = current1
+    if current2:
+        tail.next = current2
+    return dummy.next
+def duplicateRemove(list):
+    current = list
+    previous = None
+    values = []
+    while current is not None:
+        if current.value in values:
+            previous.next = current.next
+        else:
+            values.append(current.value)
+            previous = current
+        current = current.next
+    return list
+
+# reverse link list
+def reverse(list):
+    current = list
+    previous = None
+    while current is not None:
+        next = current.next
+        current.next = previous
+        previous = current
+        current = next
+    return previous
+         
+   
+        
+    
+print('compare two link list')
 print(compare(list1, list2))
+
+print('merge two sorted link list')
+two_sorted_data =(mergeList(list1, list2))
+print_list(two_sorted_data)
+print('remove removeDuplicates')
+print_list(duplicateRemove(two_sorted_data))
+print('reverse link list')
+print_list(reverse(two_sorted_data))
+
+
 
 
